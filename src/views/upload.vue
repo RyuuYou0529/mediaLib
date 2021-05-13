@@ -15,6 +15,7 @@
 </template>
 
 <script>
+var extnames = ['image/jpeg', 'image/png', 'image/jpg']
 export default {
   data () {
     return {
@@ -23,8 +24,7 @@ export default {
   },
   methods: {
     beforeUpload (file) {
-      const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png' ||
-       file.type === 'image/jpg' || file.type === 'image/gif'
+      const isJpgOrPng = extnames.includes(file.type)
       if (!isJpgOrPng) {
         this.$message.error('You can only upload JPG file!')
       }

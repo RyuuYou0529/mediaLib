@@ -25,19 +25,71 @@ mediaLib
 
 ## API
 ### 上传图片
-- 请求地址：
+- 请求：
+
   http://localhost:3000/api/picture/upload 
+
   （xxx:xx/api/picture/upload）
+
 - 响应
+
   {
+
   ​	success: boolean,
+
   ​	message: string,
+
   ​	data: {
+
   ​		pictureUrl: string
+
   ​		//其他暂无...
+
   ​	}
+
   }
+### 删除图片
+
+- 请求：
+
+  http://localhost:3000/api/picture/deleteOne
+
+  （xxx:xx//api/picture/deleteOne）
+
+- 响应
+
+  {
+
+  ​	success: boolean,
+
+  ​	message: string
+
+  }
+
+### 获取所有图片
+
+- 请求：
+
+  http://localhost:3000/api/picture/getAll
+
+  （xxx:xx//api/picture/getAll）
+
+- 响应
+
+  {
+
+  ​	success: boolean,
+
+  ​	message: string,
+
+  ​	collection: []
+
+  }
+
 ## 演示
 ![image](./images/demo1.jpg)
+
 ![image](./images/demo2.jpg)
 ![image](./images/demo3.jpg)
+
+![image](./images/demo4.jpg)

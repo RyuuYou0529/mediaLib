@@ -7,10 +7,15 @@ import {
   Col,
   Button,
   Upload,
+  Card,
   message
 } from 'ant-design-vue'
 import App from './App'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 // import router from './router'
+
+Vue.use(VueAxios, axios)
 
 Vue.component(Layout.name, Layout)
 Vue.component(Layout.Header.name, Layout.Header)
@@ -24,6 +29,8 @@ Vue.component(Row.name, Row)
 Vue.component(Col.name, Col)
 Vue.component(Button.name, Button)
 Vue.component(Upload.name, Upload)
+Vue.component(Card.Meta.name, Card.Meta)
+Vue.component(Card.name, Card)
 Vue.prototype.$message = message
 
 Vue.config.productionTip = false

@@ -1,17 +1,22 @@
 const Koa = require('koa')
+const cors = require("koa2-cors")
 const views = require('koa-views')
 const path = require('path')
 const static = require('koa-static')
-const { uploadFile } = require('./util/upload')
+const bodyParser = require('koa-bodyparser')
 
-const cors = require("koa2-cors")
+const upload = require('./util/upload')
+const getAll = require('./util/getAll')
+const deleteFile = require('./util/delete')
 
 const app = new Koa()
-
 
 /**
  * 使用第三方中间件 start
  */
+ app.use(cors({}))
+ app.use(bodyParser())
+
 app.use(views(path.join(__dirname, './view'), {
   extension: 'ejs'
 }))
@@ -22,35 +27,49 @@ const staticPath = './static'
 app.use(static(
   path.join( __dirname,  staticPath)
 ))
-
-app.use(cors())
 /**
  * 使用第三方中间件 end
  */
 
-
 app.use( async ( ctx ) => {
-  if ( ctx.method === 'GET' ) {
-    let title = 'upload pic async'
-    await ctx.render('index', {
-      title,
-    })
-  } else if ( ctx.url === '/api/picture/upload' && ctx.method === 'POST' ) {
+  var result = {success: false}
+
+  //获取管理页面
+  if ( ctx.url === '/'  && ctx.method === 'GET' ) {
+    // 停用
+    // let title = 'upload pic async'
+    // await ctx.render('index', {
+    //   title,
+    // })
+  }
+  //上传图片
+  else if ( ctx.url === '/api/picture/upload' && ctx.method === 'POST' ) {
     // 上传文件请求处理
-    let result = { success: false }
     let serverFilePath = path.join( __dirname, 'static/image' )
 
     // 上传文件事件
-    result = await uploadFile( ctx, {
+    result = await upload.uploadFile( ctx, {
       //fileType: 'album', //暂时取消
       path: serverFilePath
     })
     ctx.body = result
     console.log(result)
-  } else if ( ctx.url === 'api/picture/getAll' && ctx.method === 'GET' ) {
   }
+  //获取所有图片
+  else if ( ctx.url === '/api/picture/getAll' && ctx.method === 'GET' ) {
+    result = await getAll.getAllFile(ctx, "./static/image")
+    ctx.body = result
+    console.log(result)
+  }
+  //删除一张图片
+  else if ( ctx.url === '/api/picture/deleteOne' && ctx.method === 'DELETE' ) {
+    console.log('delete: ', ctx.request.body)
+    result = await deleteFile.deleteOne(`./static/image/${ctx.request.body.name}`)
+    ctx.body = result
+    console.log(result)
+  }
+  //其他请求显示404
   else {
-    // 其他请求显示404
     ctx.body = '<h1>404！！！ o(╯□╰)o</h1>'
   }
 
