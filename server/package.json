@@ -1,7 +1,7 @@
 {
-  "name": "upload-async",
+  "name": "mediaLib",
   "version": "1.0.0",
-  "description": "koa upload-async demo",
+  "description": "mediaLib server",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -9,15 +9,13 @@
   "keywords": [
     "koajs"
   ],
-  "author": "chenshenhai",
   "license": "MIT",
   "dependencies": {
-    "busboy": "^0.2.14",
-    "ejs": "^2.5.7",
     "koa": "^2.3.0",
+    "busboy": "^0.2.14",
     "koa-static": "^3.0.0",
-    "koa-views": "^5.2.1",
-    "koa2-cors": "^2.0.6"
+    "koa2-cors": "^2.0.6",
+    "koa-bodyparser": "^4.3.0"
   },
   "engines": {
     "node": ">=7.6.0",

@@ -35,13 +35,13 @@ export default {
       return isJpgOrPng && isLt2M
     },
     uploadChange (info) {
-      // console.log(info)
+      console.log(info)
       if (info.file.status === 'uploading') {
         console.log('uploading')
         this.fileList = info.fileList
-      } else if (info.file.status === 'done' && info.file.response.success === true) {
+      } else if (info.file.status === 'done') {
         console.log('done', this.fileList.length)
-        console.log(info.file.response.data.pictureUrl)
+        console.log(info.file.response)
         this.$message.success('Success!')
         console.log(this.fileList)
       } else {

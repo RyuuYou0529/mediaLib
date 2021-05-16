@@ -1,6 +1,4 @@
-const inspect = require('util').inspect
 const path = require('path')
-const os = require('os')
 const fs = require('fs')
 const Busboy = require('busboy')
 
@@ -38,21 +36,19 @@ function getSuffixName( fileName ) {
  */
 function uploadFile( ctx, options) {
   let req = ctx.req
-  let res = ctx.res
   let busboy = new Busboy({headers: req.headers})
 
   // 获取类型
   // let fileType = options.fileType || 'common'
   // let filePath = path.join( options.path,  fileType)
   let filePath = path.join( options.path)
-  let mkdirResult = mkdirsSync( filePath )
+  //let mkdirResult = mkdirsSync( filePath )
 
   return new Promise((resolve, reject) => {
     console.log('文件上传中...')
     let result = {
-      success: false,
-      message: '',
-      data: null
+      success: true,
+      url: null
     }
 
     // 解析请求文件事件
@@ -66,13 +62,8 @@ function uploadFile( ctx, options) {
 
       // 文件写入事件结束
       file.on('end', function() {
-        result.success = true
-        result.message = '文件上传成功'
-        result.data = {
-          // pictureUrl: `http://${ctx.host}/image/${fileType}/${fileName}`
-          pictureUrl: `http://${ctx.host}/image/${fileName}`
-        }
-        console.log('文件上传成功！url：http:'+result.data.pictureUrl)
+        result.url = `/upload/${fileName}`
+        console.log('文件上传成功 path: '+result.url)
         resolve(result)
       })
     })
@@ -86,14 +77,14 @@ function uploadFile( ctx, options) {
     // 解析错误事件
     busboy.on('error', function(err) {
       console.log('文件上出错')
-      reject(result)
+      result.success = false
+      resolve(result)
     })
 
     req.pipe(busboy)
   })
 
 }
-
 
 module.exports =  {
   uploadFile

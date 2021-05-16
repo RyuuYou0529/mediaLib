@@ -12,79 +12,113 @@ mediaLib
 
 ## 所需模块
 - 前端demo
-  - vue/cli
-  ![image](./images/npmls.jpg)
+
+  目录：/	
+
+  npm install
+
+  
 
 - 后端
-  - koa
-  - koa-views
-  - koa-static
-  - koa2-cors
-  - busboy
-  - ejs
+
+  目录：/
+
+  npm install
 
 ## API
 ### 上传图片
 - 请求：
 
-  http://localhost:3000/api/picture/upload 
-
-  （xxx:xx/api/picture/upload）
+  /api/picture/upload 
 
 - 响应
 
-  {
+  - 成功
 
-  ​	success: boolean,
+    {
 
-  ​	message: string,
+    ​	status: 200,
 
-  ​	data: {
+    ​	message: 'OK',
 
-  ​		pictureUrl: string
+    ​	body: {
 
-  ​		//其他暂无...
+    ​		url: /upload/example.jpg
 
-  ​	}
+    ​	}
 
-  }
+    }
+
+  - 失败
+
+    {
+
+    ​	status: 500,
+
+    ​	message: 'upload error'
+
+    }
 ### 删除图片
 
 - 请求：
 
-  http://localhost:3000/api/picture/deleteOne
-
-  （xxx:xx//api/picture/deleteOne）
+  /api/picture/deleteOne
 
 - 响应
 
-  {
+  - 成功
 
-  ​	success: boolean,
+    {
 
-  ​	message: string
+    ​	success: 200,
 
-  }
+    ​	message: 'OK'
+  
+    }
+  
+  - 失败
+  
+    {
+  
+    ​	status: 500,
+  
+    ​	message: 'delete error'
+  
+    }
 
 ### 获取所有图片
 
 - 请求：
 
-  http://localhost:3000/api/picture/getAll
-
-  （xxx:xx//api/picture/getAll）
+  /api/picture/getAll
 
 - 响应
 
-  {
+  - 成功
 
-  ​	success: boolean,
+    {
 
-  ​	message: string,
+    ​	success: 200,
 
-  ​	collection: []
+    ​	message: 'OK',
 
-  }
+    ​	body: {
+
+    ​		collection: []
+    
+    ​	}
+    
+    }
+
+  - 失败
+
+    {
+
+    ​	status: 500,
+
+    ​	message: 'getAll error'
+
+    }
 
 ## 演示
 ![image](./images/demo1.jpg)
@@ -92,4 +126,3 @@ mediaLib
 ![image](./images/demo2.jpg)
 ![image](./images/demo3.jpg)
 
-![image](./images/demo4.jpg)

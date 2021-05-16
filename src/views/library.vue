@@ -35,7 +35,10 @@ export default {
           console.log(response.data.collection)
           that.collection.length = 0
           const tempArr = response.data.collection
-          for (var i = 0; i < tempArr.length; i += 4) {
+          for (let i = 0; i < tempArr.length; ++i) {
+            tempArr[i] = `http://${host}` + tempArr[i]
+          }
+          for (let i = 0; i < tempArr.length; i += 4) {
             that.collection.push(tempArr.slice(i, i + 4))
           }
           console.log(that.collection)
