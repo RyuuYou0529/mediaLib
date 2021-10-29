@@ -12,19 +12,17 @@ function mkdirsSync(dirName) {
     let result = { 
         success: false,
         message: '',
-        url: null
+        url: dirName
     }
     let locPath = path.join(global.staticPath,dirName);
     return new Promise((resolve, reject)=>{
         if(fs.existsSync(locPath)){
             result.message = 'the dir has existed';
-            result.url = dirName;
             reject(result);
         }else{
             fs.mkdirSync(locPath);
             result.success = true;
             result.message = 'mkdir ok';
-            result.url = locPath;
             resolve(result);
         }
     })

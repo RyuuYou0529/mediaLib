@@ -1,0 +1,13 @@
+version: "3"
+services: 
+  mediaLib:
+    image: medialib
+    container_name: medialib
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./static:/app/static
+      - ./temp:/app/temp
+    ports:
+      - 3000:3000
